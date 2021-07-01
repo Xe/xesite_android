@@ -17,16 +17,13 @@ package website.christine.xesite;
 
 import android.net.Uri;
 
-
 public class LauncherActivity
         extends com.google.androidbrowserhelper.trusted.LauncherActivity {
-
 
     @Override
     protected Uri getLaunchingUrl() {
         // Get the original launch Url.
         Uri uri = super.getLaunchingUrl();
-
 
         return uri;
     }

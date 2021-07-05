@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="website.christine.xesite.CurrentPostWidgetConfigureActivity"
+    android:initialKeyguardLayout="@layout/current_post_widget"
+    android:initialLayout="@layout/current_post_widget"
+    android:minWidth="250dp"
+    android:minHeight="40dp"
+    android:previewImage="@drawable/example_appwidget_preview"
+    android:resizeMode="horizontal"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen"></appwidget-provider>

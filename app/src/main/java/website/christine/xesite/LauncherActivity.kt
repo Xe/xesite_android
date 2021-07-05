@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package website.christine.xesite;
+package website.christine.xesite
 
-import android.net.Uri;
+import android.net.Uri
+import com.google.androidbrowserhelper.trusted.LauncherActivity
 
-public class LauncherActivity
-        extends com.google.androidbrowserhelper.trusted.LauncherActivity {
-
-    @Override
-    protected Uri getLaunchingUrl() {
+class LauncherActivity : LauncherActivity() {
+    override fun getLaunchingUrl(): Uri {
         // Get the original launch Url.
-        Uri uri = super.getLaunchingUrl();
-
-        return uri;
+        return super.getLaunchingUrl()
     }
 }

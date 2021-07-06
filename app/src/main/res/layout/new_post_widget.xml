@@ -10,34 +10,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="92dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="109dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="92dp"
                 android:layout_height="75dp"
                 android:src="@drawable/splash" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="67dp"
-                android:text="Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/parent_article"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="auto"
-            android:onClick="clickButton"
-            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/article_title"
@@ -54,22 +38,21 @@
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/appwidget_text2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/backgroundColor"
-                android:contentDescription="@string/appwidget_body_preview"
-                android:text="@string/appwidget_body_preview"
-                android:textColor="#282828"
-                android:textSize="16sp"
-                android:textStyle="italic" />
-
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/article_preview"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/backgroundColor"
+            android:contentDescription="@string/appwidget_body_preview"
+            android:text="@string/appwidget_body_preview"
+            android:textColor="#282828"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

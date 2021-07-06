@@ -17,6 +17,12 @@ import com.android.volley.toolbox.HurlStack
 class NewPostWidget : AppWidgetProvider() {
     private lateinit var requestQueue: RequestQueue
 
+    private fun userAgent(ctx: Context): String {
+        val pkgInfo = ctx.getPackageManager().getPackageInfo(ctx.packageName, 0)
+
+        return ctx.packageName.plus("/").plus(pkgInfo.versionName)
+    }
+
     override fun onUpdate(
         ctx: Context,
         appWidgetManager: AppWidgetManager,
@@ -24,10 +30,13 @@ class NewPostWidget : AppWidgetProvider() {
     ) {
         val url = "https://christine.website/.within/website.within.xesite/new_post"
 
+        val headers: MutableMap<String, String> = mutableMapOf()
+        headers.put("User-Agent", this.userAgent(ctx));
+
         val jor: GsonGetRequest<NewPost> = GsonGetRequest(
             url,
             NewPost::class.java,
-            null,
+            headers,
             Response.Listener<NewPost> { response ->
                 Log.println(Log.INFO, "new_post", response.toString())
                 // There may be multiple widgets active, so update all of them

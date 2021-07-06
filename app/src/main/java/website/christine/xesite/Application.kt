@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package website.christine.xesite;
+package website.christine.xesite
 
+import android.app.Application
 
-public class Application extends android.app.Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
+class Application : Application() {
+    override fun onCreate() {
+        super.onCreate()
     }
 }

@@ -1,7 +1,7 @@
 <resources>
 
     <style name="ThemeOverlay.Xesite_android.AppWidgetContainer" parent="">
-        <item name="appWidgetBackgroundColor">@color/light_blue_600</item>
-        <item name="appWidgetTextColor">@color/light_blue_50</item>
+        <item name="appWidgetBackgroundColor">@color/gruvbox_dark_bg</item>
+        <item name="appWidgetTextColor">@color/gruvbox_dark_fg</item>
     </style>
 </resources>

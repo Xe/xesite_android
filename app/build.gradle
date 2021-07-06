@@ -54,8 +54,8 @@ android {
         applicationId "website.christine.xesite"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.0.3.2"
+        versionCode 6
+        versionName "1.1.0.0"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
@@ -67,14 +67,10 @@ android {
         def launchUrl = "https://" + twaManifest.hostName + twaManifest.launchUrl
         resValue "string", "launchUrl", launchUrl
 
-        
-            // The URL the Web Manifest for the Progressive Web App that the TWA points to. This
-            // is used by Chrome OS to open the Web version of the PWA instead of the TWA, as it
-            // will probably give a better user experience for non-mobile devices.
-            resValue "string", "webManifestUrl", 'https://christine.website/static/manifest.json'
-        
-
-        
+        // The URL the Web Manifest for the Progressive Web App that the TWA points to. This
+        // is used by Chrome OS to open the Web version of the PWA instead of the TWA, as it
+        // will probably give a better user experience for non-mobile devices.
+        resValue "string", "webManifestUrl", 'https://christine.website/static/manifest.json'
 
         // The hostname is used when building the intent-filter, so the TWA is able to
         // handle Intents to open https://svgomg.firebaseapp.com.
@@ -202,11 +198,9 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    
-        implementation 'com.google.androidbrowserhelper:locationdelegation:1.0.0'
-    
-        implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.android.volley:volley:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.androidbrowserhelper:locationdelegation:1.0.0'
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.2.0'
 }

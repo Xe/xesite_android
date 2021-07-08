@@ -52,10 +52,10 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "website.christine.xesite"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
-        versionCode 6
-        versionName "1.1.0.0"
+        versionCode 8
+        versionName "1.1.1.1"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
@@ -153,6 +153,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 task generateShorcutsFile {
@@ -203,4 +206,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.google.androidbrowserhelper:locationdelegation:1.0.0'
     implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 }

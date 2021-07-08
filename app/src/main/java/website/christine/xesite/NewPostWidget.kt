@@ -1,11 +1,11 @@
 package website.christine.xesite
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.os.Build
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -15,6 +15,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.BasicNetwork
 import com.android.volley.toolbox.DiskBasedCache
 import com.android.volley.toolbox.HurlStack
+import java.util.concurrent.ThreadLocalRandom
 
 /**
  * Implementation of App Widget functionality.
@@ -26,17 +27,22 @@ class NewPostWidget : AppWidgetProvider() {
         val pkgInfo = ctx.getPackageManager().getPackageInfo(ctx.packageName, 0)
 
         return ctx.packageName.plus("/").plus(pkgInfo.versionName)
+            .plus("(android; +https://christine.website/contact)")
     }
 
     private fun notify(ctx: Context, newPost: NewPost) {
+        val notificationIntent = Intent(Intent.ACTION_VIEW, Uri.parse(newPost.link))
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(ctx, 0, notificationIntent, 0)
+
         var builder = NotificationCompat.Builder(ctx, NEW_POST_CHANNEL)
             .setSmallIcon(R.drawable.splash)
+            .setContentIntent(pendingIntent)
             .setContentTitle(newPost.title)
             .setContentText(newPost.summary)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         NotificationManagerCompat.from(ctx).apply {
-            notify(notificationId, builder.build())
+            notify(ThreadLocalRandom.current().nextInt(), builder.build())
         }
     }
 
@@ -64,7 +70,7 @@ class NewPostWidget : AppWidgetProvider() {
 
                 Log.println(Log.INFO, "new_post", response.toString())
                 // There may be multiple widgets active, so update all of them
-                for (appWidgetId in appWidgetIds) {
+                appWidgetIds.forEach { appWidgetId ->
                     this.updateAppWidget(ctx, appWidgetManager, appWidgetId, response)
                 }
             }, Response.ErrorListener { error ->
@@ -99,31 +105,40 @@ class NewPostWidget : AppWidgetProvider() {
 
     override fun onEnabled(ctx: Context) {
         this.makeQueue(ctx)
-        //this.createNotificationChannel(ctx)
-        savePref(ctx, "old_url", "http://google.com")
     }
 
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
     }
 
+    override fun onReceive(ctx: Context?, intent: Intent?) {
+        super.onReceive(ctx, intent)
+    }
+
     private fun updateAppWidget(
-        context: Context,
+        ctx: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int,
         body: NewPost
     ) {
         // Construct the RemoteViews object
-        val views = RemoteViews(context.packageName, R.layout.new_post_widget)
+        val views = RemoteViews(ctx.packageName, R.layout.new_post_widget)
 
         views.setTextViewText(
             R.id.article_title,
             body.title
         )
+
         views.setTextViewText(
             R.id.article_preview,
             body.summary
         )
+
+        val pendingIntent: PendingIntent = Intent(Intent.ACTION_VIEW, Uri.parse(body.link))
+            .let { intent ->
+                PendingIntent.getActivity(ctx, 0, intent, 0)
+            }
+        views.setOnClickPendingIntent(R.id.widget_parent, pendingIntent)
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)

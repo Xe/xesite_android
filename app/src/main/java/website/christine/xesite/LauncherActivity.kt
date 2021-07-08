@@ -15,13 +15,6 @@
  */
 package website.christine.xesite
 
-import android.content.Context
-import android.net.Uri
 import com.google.androidbrowserhelper.trusted.LauncherActivity
 
-class LauncherActivity : LauncherActivity() {
-    override fun getLaunchingUrl(): Uri {
-        // Get the original launch Url.
-        return super.getLaunchingUrl()
-    }
-}
+class LauncherActivity : LauncherActivity() {}

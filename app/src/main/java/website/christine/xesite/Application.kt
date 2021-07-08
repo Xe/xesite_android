@@ -49,4 +49,3 @@ class Application : Application() {
 
 internal val NEW_POST_CHANNEL = "New Posts";
 internal val NEW_POST_CHANNEL_DESC = "New posts on christine.website";
-internal val notificationId = 1;

@@ -16,9 +16,37 @@
 package website.christine.xesite
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 
 class Application : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        val ctx = this.applicationContext
+        createNotificationChannel(ctx)
+    }
+
+    private fun createNotificationChannel(ctx: Context) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = NEW_POST_CHANNEL
+            val descriptionText = NEW_POST_CHANNEL_DESC
+            val importance = NotificationManager.IMPORTANCE_LOW
+            val channel = NotificationChannel(NEW_POST_CHANNEL, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }
+
+internal val NEW_POST_CHANNEL = "New Posts";
+internal val NEW_POST_CHANNEL_DESC = "New posts on christine.website";
+internal val notificationId = 1;

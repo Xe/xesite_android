@@ -15,6 +15,7 @@
  */
 package website.christine.xesite
 
+import android.content.Context
 import android.net.Uri
 import com.google.androidbrowserhelper.trusted.LauncherActivity
 

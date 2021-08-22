@@ -24,10 +24,12 @@ class NewPostWidget : AppWidgetProvider() {
     private lateinit var requestQueue: RequestQueue
 
     private fun userAgent(ctx: Context): String {
-        val pkgInfo = ctx.getPackageManager().getPackageInfo(ctx.packageName, 0)
-
-        return ctx.packageName.plus("/").plus(pkgInfo.versionName)
-            .plus("(android; +https://christine.website/contact)")
+        return BuildConfig.APPLICATION_ID
+            .plus("/")
+            .plus(BuildConfig.VERSION_NAME)
+            .plus("(android; ")
+            .plus(BuildConfig.BUILD_TYPE)
+            .plus("; +https://christine.website/contact")
     }
 
     private fun notify(ctx: Context, newPost: NewPost) {
